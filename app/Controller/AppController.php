@@ -47,7 +47,9 @@ class AppController extends Controller {
 	}
 
     function beforeFilter() {
+        $this->loadModel('User');
         $this->set('authUser', $this->Auth->user());
+        $this->set('aut', $this->User->find('first', array('conditions' => array('User.id' => $this->Auth->user()['id'])))['User']);
         $this->Auth->fields = array(
             'username' => 'username',
             'password' => 'password'

@@ -21,7 +21,6 @@ class EventoController extends AppController {
 		$this->loadModel('Evento');
 		$this->loadModel('Presenca');
 		$evento = $this->Evento->find('first', array('conditions' => array('Evento.id' => $id)));
-
 	   if(count($this->Presenca->find('first', array('conditions' => array('Presenca.evento_id' => $id,'Presenca.user_id' => $authUser['User']['id'])))) > 0) {
 			  $this->Session->setFlash(__('Você já está cadastrado.'));
 		} else if($authUser['User']['carteira'] < $evento['Evento']['preco']) {
@@ -110,6 +109,22 @@ class EventoController extends AppController {
 		}
 		$this->set('ctgs', $lista);
 
+	}
+
+	public function cancelarinsc($id) {
+		$this->loadModel('User');
+		$this->loadModel('Evento');
+		$this->loadModel('Presenca');
+		$authUser = $this->User->find('first', array('conditions' => array('id' => $this->Auth->user()['id'])));
+		$evt = $this->Evento->find('first', array('conditions' => array('Evento.id' => $id)));
+		$psc = $this->Presenca->find('first', array('conditions' => array('Presenca.evento_id' => $id, 'Presenca.user_id' => $authUser['User']['id'])));
+		$valor = $evt['Evento']['preco'];
+		$this->request->data['User'] = $authUser['User'];
+		$this->request->data['User']['carteira'] += $valor;
+		if($this->Presenca->delete($psc['Presenca']['id']) && $this->User->save($this->request->data)) {
+			$this->Session->setFlash(__('Evento cancelado com sucesso.'), 'flash', array('class' => 'success'));
+		}
+		$this->redirect(array('controller' => 'pages', 'action' => 'home'));
 	}
 
 	public function beforeFilter(){

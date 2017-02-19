@@ -45,6 +45,8 @@ class PagesController extends AppController {
 
 	public function home(){
 		$this->loadModel('Categoria');
+		$this->loadModel('User');
+		$authUse = $this->User->find('first', array('conditions' => array('id' => $this->Auth->user()['id'])));
 		$this->set('categorias', $this->Categoria->find('all'));
 		$this->loadModel('Evento');
 		$evts = $this->Evento->find('all');
@@ -56,6 +58,7 @@ class PagesController extends AppController {
 	       	$evts[$key]['Evento']['long'] = $output->results[0]->geometry->location->lng;
     	}
     	$this->set('evts', $evts);
+    	$this->set('aut', $authUse['User']);
 	}
 
 	public function display() {
