@@ -80,7 +80,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				?>
 				<div style="float: right" class="form-group"> 
 		                 <ul class="nav navbar-nav">
-		                   <li class="header-nav-item navbar-text"> <h6>Bem vindo, <?=$authUser["nome"]?>  &nbsp;   &nbsp; Créditos:  <?=$authUser["carteira"]?> ¢ <i class="glyphicon glyphicon-log-out"></i> &nbsp;
+		                   <li class="header-nav-item navbar-text"> <h6>Bem vindo, <?=$authUser["nome"]?> &nbsp; | <a href="/cake/evento/cadastrados"> Eventos Cadastrados </a> | Créditos:  <?=$authUser["carteira"]?> ¢ <i class="glyphicon glyphicon-log-out"></i> &nbsp;
             					<?php
             					 echo $this->Html->link('Sair', array("controller" => "user", "action" => "logout"));
             					 ?>

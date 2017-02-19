@@ -82,6 +82,15 @@ class EventoController extends AppController {
 
 	}
 
+	public function cadastrados(){
+		$this->loadModel('Evento');
+		$this->loadModel('Presenca');
+		$psc = $this->Presenca->find('all', array('conditions' => array('Presenca.user_id' => $this->Auth->user()['id'])));
+		$evt = $this->Evento->find('all');
+		$this->set('psc', $psc);
+		$this->set('evt', $evt); 
+	}
+
 	public function add($id) {
 		$this->loadModel('Evento');
 		$this->loadModel('Categoria');

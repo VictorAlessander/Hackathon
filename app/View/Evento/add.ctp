@@ -30,7 +30,10 @@
         <input type="date" format="dd/mm/YYYY"  id="iData" class="form-control" placeholder="Data" required="">
         </div>
         </div>
+          <label for="inputVagas" class="sr-only">Horario</label>
+        <input type="text" id="inputVagas"  name="data[Evento][hora]" class="form-control" placeholder="00:00" required="">
         <input type="hidden" name="data[Evento][data]" format="dd/mm/YYYY"  id="inputData" class="form-control" placeholder="Data" required="">
+        <br>
         <input type="hidden" name="data[Evento][user_id]" value="<?=$authUser['id']?>">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
       </form>

@@ -20,6 +20,7 @@
             <br>
             <br>
             <p> Local: <?=$evento['Evento']['local']?></p>
+            <p> Horario: <?=$evento['Evento']['hora']?>
             <p>Deseja participar do evento?</p>
             <?php 
               if($authUser){
