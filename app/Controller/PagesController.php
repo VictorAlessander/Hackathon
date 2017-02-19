@@ -37,14 +37,7 @@ class PagesController extends AppController {
  */
 	public $uses = array();
 
-/**
- * Displays a view
- *
- * @param mixed What page to display
- * @return void
- * @throws NotFoundException When the view file could not be found
- *	or MissingViewException in debug mode.
- */
+
 	public function beforeFilter() {
         parent::beforeFilter();
 		$this->Auth->allow('home', 'display');

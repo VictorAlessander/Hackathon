@@ -7,7 +7,7 @@
   ?>
 </h1>
 
-<div class="row" style="margin: 0 auto; margin-top: 100px; margin-left: -15px; margin-right: -15px;">
+<div class="row row-cat">
 
           <?php foreach ($eventos as $evento) { ?>
           <div class="col-lg-4">

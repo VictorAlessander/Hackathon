@@ -1,4 +1,4 @@
-<div class="container" style="width: 600px; margin-top: 60px; margin-bottom: 40px">
+<div class="container" class="contain-add">
       <form class="form-signin" method="post">
         <h2 class="form-signin-heading">Crie seu evento</h2>
         <label for="inputText" class="sr-only">Nome do evento</label>

@@ -1,4 +1,4 @@
-    <div class="container" style="margin-top: 100px;">
+    <div class="container container-100">
       <div class="descricao-evento">
         <div class="row">
           <div class="col-lg-7">

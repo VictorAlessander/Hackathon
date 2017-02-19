@@ -14,7 +14,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+$cakeDescription = __d('cake_dev', 'Paçoca Connection');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
@@ -32,6 +32,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->Html->css('bootstrap.min');
 		echo $this->Html->css('bootstrap-theme.min');
 		echo $this->Html->css('carousel');
+		echo $this->Html->css('site');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
@@ -49,41 +50,44 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         <nav class="navbar navbar-inverse navbar-static-top">
           <div class="container">
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-              </button>
-              <?php echo $this->Html->link('Paçoca', '/', array('class'=> 'navbar-brand', 'style' => 'margin-top: 10px;')); ?>
+				<font size="16px">
+              <?php echo $this->Html->link("Paçoca", '/', array('class'=> 'navbar-brand nav8')); ?>
+            	</font>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
 		       <?php 
 				if(!$authUser){
-				echo '
+				?>
 		                <div style="float: right" class="form-group">
 		                  <ul class="nav navbar-nav">
 		                    <li>
-		                      <input type="text" placeholder="Email" class="form-control" name="data[User][username]" style="margin-top: 10px; margin-right: 5px">
+		                      <input type="text" placeholder="Email" class="input-nav form-control" name="data[User][username]">
 		                    </li>
 		                    <li>
-		                      <input type="password" placeholder="Senha" class="form-control" name="data[User][password]" style="margin-top: 10px; margin-right: 5px">
+		                      <input type="password" placeholder="Senha" class="input-nav form-control" name="data[User][password]">
 		                    </li>
 		                    <li>
-		                      <button type="submit" class="btn btn-success" style="margin-top: 10px">Entrar</button>
+		                      <button type="submit" class="btn btn-success entrar">Entrar</button>
 		                    </li>
 		                    <li>
-		                      <a href="/cake/login/add"><button class="btn btn-warning"> Cadastrar-se</button></a>
+		                      <a href="/cake/user/add" class="cadastrese"><span class="btn btn-warning"> Cadastrar-se</span></a>
 		                    </li>
 		                  </ul>
-		                </div>';
+		                </div>
+		              <?php
 		        
 				} else {
-				echo '<div style="float: right" class="form-group"> '.
-		                 ' <ul class="nav navbar-nav">'.
-		                   ' <li class="header-nav-item navbar-text"> <h6>Bem vindo, '. $authUser["nome"] .' &nbsp;   &nbsp; Créditos: '. $authUser["carteira"] .'¢ <i class="glyphicon glyphicon-log-out"></i> &nbsp;';
-            			echo		$this->Html->link('Sair', array("controller" => "user", "action" => "logout"));
-          			echo		'</h6></li>'.
-		                 ' </ul>'.
-		               ' </div>';
-
+				?>
+				<div style="float: right" class="form-group"> 
+		                 <ul class="nav navbar-nav">
+		                   <li class="header-nav-item navbar-text"> <h6>Bem vindo, <?=$authUser["nome"]?>  &nbsp;   &nbsp; Créditos:  <?=$authUser["carteira"]?> ¢ <i class="glyphicon glyphicon-log-out"></i> &nbsp;
+            					<?php
+            					 echo $this->Html->link('Sair', array("controller" => "user", "action" => "logout"));
+            					 ?>
+          					</h6></li>
+		                  </ul>
+		                </div>
+				<?php
 				} 
 				?>
             </div>
@@ -100,7 +104,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			<?php echo $this->fetch('content'); ?>
 		</div>
 	<div class="container">
-	  <footer style="margin-top: 30px;">
+	  <footer class="footer-margin">
         <p class="pull-right"><a href="#">Ir para o topo</a></p>
         <p>&copy; 2017 Paçoca, Hackathon. &middot;  <a href="#"></a></p>
       </footer>
