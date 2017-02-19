@@ -14,7 +14,7 @@
             <div class="carousel-caption">
               <h1>A plataforma perfeita para você aprender</h1>
               <p>Aqui você usa uma moeda própria e não terá que gastar dinheiro para aprender. Além disto, todos os eventos são disponibilizados pelos nossos próprios usuários.</p>
-              <p><a class="btn btn-lg btn-primary" href="edge.ctp" role="button">Crie sua conta hoje</a></p>
+              <p><a class="btn btn-lg btn-primary" href="user/add" role="button">Crie sua conta hoje</a></p>
             </div>
           </div>
         </div>
@@ -30,7 +30,6 @@
               <p><b>4- Receba créditos por participar dos eventos</b></p>-->
               <p><b>5- Use os créditos para comprar outros eventos e se especializar</b></p>
               <p><b>6- Crie seu próprio evento e ganhe ainda mais créditos. Participe!</b></p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
             </div>
           </div>
         </div>

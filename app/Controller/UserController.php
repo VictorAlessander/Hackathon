@@ -21,6 +21,7 @@ class UserController extends AppController {
     public function add() {
         if ($this->request->is('post')) {
             $this->User->create();
+            $this->request->data['User']['carteira'] = 10;
             if ($this->User->save($this->request->data)) {
 
                 $this->Session->setFlash(__('O usuario foi salvo.'), 'flash', array('class' => 'success'));
@@ -29,6 +30,8 @@ class UserController extends AppController {
                 $this->Session->setFlash(__('Não foi possivel salvar, tente novamente.'));
             }
         }
+        $this->loadModel('Categoria');
+        $this->set('ctgs', $this->Categoria->find('list'));
     }
 
     public function edit($id = null) {

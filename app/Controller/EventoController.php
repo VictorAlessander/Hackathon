@@ -8,7 +8,11 @@ class EventoController extends AppController {
 		$this->loadModel('Evento');
 		//$this->set('categorias', $this->Categoria->find('first', array('conditions' => array('Categoria.id' => $id))));
 		$this->set('userss', $this->User->find('all'));
-		$this->set('evento', $this->Evento->find('first', array('conditions' => array('Evento.id' => $id))));
+		$evt = $this->Evento->find('first', array('conditions' => array('Evento.id' => $id)));
+		$this->set('evento', $evt);
+
+		$this->set('dt', DateTime::createFromFormat('d/m/Y', $evt['Evento']['data']));
+        $this->set('dt1', DateTime::createFromFormat('d/m/Y', date("d/m/Y")));
 	}
 
 	public function participar($id) {
@@ -18,7 +22,7 @@ class EventoController extends AppController {
 		$this->loadModel('Presenca');
 		$evento = $this->Evento->find('first', array('conditions' => array('Evento.id' => $id)));
 
-	   if(count($this->Presenca->find('first', array('conditions' => array('Presenca.user_id' => $authUser['User']['id'])))) > 0) {
+	   if(count($this->Presenca->find('first', array('conditions' => array('Presenca.evento_id' => $id,'Presenca.user_id' => $authUser['User']['id'])))) > 0) {
 			  $this->Session->setFlash(__('Você já está cadastrado.'));
 		} else if($authUser['User']['carteira'] < $evento['Evento']['preco']) {
 			  $this->Session->setFlash(__('Você não tem créditos suficientes.'));
@@ -38,6 +42,61 @@ class EventoController extends AppController {
 		$this->redirect(array('controller' => 'evento', 'action' => 'lista', $id));
 	}
 	  
+	public function cancela($id) {
+		$this->loadModel('User');
+		$this->loadModel('Evento');
+		$this->loadModel('Presenca');
+		$evt = $this->Evento->find('first', array('conditions' => array('Evento.id' => $id)));
+		$psc = $this->Presenca->find('all', array('conditions' => array('Presenca.evento_id' => $id)));
+		foreach($psc as $p) {
+			$this->request->data['User']['id'] = $p['Presenca']['user_id'];
+			$usuario = $this->User->find('first', array('conditions' => array('id' => $p['Presenca']['user_id'])));
+			$this->request->data['User']['carteira'] = $usuario['User']['carteira']+$evt['Evento']['preco'];
+			$this->User->save($this->request->data);
+			$this->Presenca->delete($p['Presenca']['id']);
+		}
+		$this->request->data['Evento']['id'] = $id;
+		if($this->Evento->delete($this->request->data['Evento']['id'])) {
+			$this->Session->setFlash(__('Evento cancelado com sucesso.'), 'flash', array('class' => 'success'));
+		}
+		$this->redirect(array('controller' => 'pages', 'action' => 'home'));
+	}
+
+	public function finalizar($id) {
+		$this->loadModel('User');
+		$this->loadModel('Evento');
+		$this->loadModel('Presenca');
+		$contador = 0;
+		$evt = $this->Evento->find('first', array('conditions' => array('Evento.id' => $id)));
+		$psc = $this->Presenca->find('all', array('conditions' => array('Presenca.evento_id' => $id)));
+		$user = $this->User->find('first', array('conditions' => array('User.id' => $evt['User']['id'])));
+		foreach($psc as $p) {
+			$contador += $evt['Evento']['preco'];
+		} 
+		$user['User']['carteira'] += $contador;
+		if($this->User->save($user)) {
+			$this->Evento->delete($id);
+			$this->Session->setFlash(__('Evento finalizado com sucesso.'), 'flash', array('class' => 'success'));
+		}
+		$this->redirect(array('controller' => 'pages', 'action' => 'home'));
+
+	}
+
+	public function add($id) {
+		$this->loadModel('Evento');
+		if($this->request->is('post')) {
+			$this->Evento->create();
+            if ($this->Evento->save($this->request->data)) {
+
+                $this->Session->setFlash(__('O evento foi salvo.'), 'flash', array('class' => 'success'));
+                $this->redirect(array('controller' => 'pages', 'action' => 'home'));
+            } else {
+                $this->Session->setFlash(__('Não foi possivel salvar, tente novamente.'));
+            }
+		}
+
+	}
+
 	public function beforeFilter(){
 		parent::beforeFilter();
 		$this->Auth->allow('lista');

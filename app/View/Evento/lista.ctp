@@ -2,6 +2,15 @@
       <div class="descricao-evento">
         <div class="row">
           <div class="col-lg-7">
+            <?php
+             if($evento['User']['id'] == $authUser['id']) {
+                echo $this->Html->link('Cancelar curso', array('controller' => 'evento', 'action' => 'cancela', $evento['Evento']['id']), array("class" => "btn btn-danger"));
+                if($evento['Evento']['data'] == date("d/m/Y") || $dt->getTimestamp() <= $dt1->getTimestamp()) {
+                  echo $this->Html->link('Finalizar curso', array('controller' => 'evento', 'action' => 'finalizar', $evento['Evento']['id']), array("class" => "btn btn-success"));
+                }
+             }
+             ?>
+
             <h1><?=$evento['Evento']['nome'] ?></h1>
             <p>Descrição: <?=$evento['Evento']['descricao'] ?></p>
             <h3>Preço</h3>

@@ -71,7 +71,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				} else {
 				echo '<div style="float: right" class="form-group"> '.
 		                 ' <ul class="nav navbar-nav">'.
-		                   ' <li class="header-nav-item navbar-text"> <h6>Bem vindo, '. $authUser["nome"] .' &nbsp; <i class="glyphicon glyphicon-log-out"></i>  &nbsp; &nbsp;';
+		                   ' <li class="header-nav-item navbar-text"> <h6>Bem vindo, '. $authUser["nome"] .' &nbsp;   &nbsp; Créditos: '. $authUser["carteira"] .'¢ <i class="glyphicon glyphicon-log-out"></i> &nbsp;';
             			echo		$this->Html->link('Sair', array("controller" => "user", "action" => "logout"));
           			echo		'</h6></li>'.
 		                 ' </ul>'.
@@ -95,7 +95,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<div class="container">
 	  <footer style="margin-top: 30px;">
         <p class="pull-right"><a href="#">Ir para o topo</a></p>
-        <p>&copy; 2017 Paçoca, Hackathon. &middot; <a href="#">Privacy</a> &middot; <a href="#"></a></p>
+        <p>&copy; 2017 Paçoca, Hackathon. &middot;  <a href="#"></a></p>
       </footer>
     </div>
 	</div>
