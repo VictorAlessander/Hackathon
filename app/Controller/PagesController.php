@@ -53,6 +53,16 @@ class PagesController extends AppController {
 	public function home(){
 		$this->loadModel('Categoria');
 		$this->set('categorias', $this->Categoria->find('all'));
+		$this->loadModel('Evento');
+		$evts = $this->Evento->find('all');
+		foreach($evts as $key => $evt) {
+			$prepAddr = str_replace(' ','+',$evt['Evento']['local']);
+	        $geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
+	        $output= json_decode($geocode);
+	        $evts[$key]['Evento']['lat'] = $output->results[0]->geometry->location->lat;
+	       	$evts[$key]['Evento']['long'] = $output->results[0]->geometry->location->lng;
+    	}
+    	$this->set('evts', $evts);
 	}
 
 	public function display() {

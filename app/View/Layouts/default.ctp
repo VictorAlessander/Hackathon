@@ -40,6 +40,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <body>
 	<?php echo $this->Html->script('jquery-3.1.1.min'); ?>
 	<?php echo $this->Html->script('bootstrap'); ?>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&v=3.13"> </script>
+	<script type="text/javascript" src="http://maplacejs.com/dist/maplace.min.js" ></script>
 	<div>
 
 	<?php echo $this->Form->create('', array('url' => array('controller' => 'user','action' =>'login'),'id'=>'FrmPost'
@@ -50,7 +52,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
               </button>
-              <?php echo $this->Html->link('Paçoca', '/', array('class'=> 'navbar-brand')); ?>
+              <?php echo $this->Html->link('Paçoca', '/', array('class'=> 'navbar-brand', 'style' => 'margin-top: 10px;')); ?>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
 		       <?php 

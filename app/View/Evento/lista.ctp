@@ -3,11 +3,13 @@
         <div class="row">
           <div class="col-lg-7">
             <?php
+             if($authUser) {
              if($evento['User']['id'] == $authUser['id']) {
                 echo $this->Html->link('Cancelar curso', array('controller' => 'evento', 'action' => 'cancela', $evento['Evento']['id']), array("class" => "btn btn-danger"));
                 if($evento['Evento']['data'] == date("d/m/Y") || $dt->getTimestamp() <= $dt1->getTimestamp()) {
                   echo $this->Html->link('Finalizar curso', array('controller' => 'evento', 'action' => 'finalizar', $evento['Evento']['id']), array("class" => "btn btn-success"));
                 }
+             }
              }
              ?>
 
@@ -21,7 +23,9 @@
             <p>Deseja participar do evento?</p>
             <?php 
               if($authUser){
-                echo $this->Html->link('Participar', array('controller' => 'evento', 'action' => 'participar', $evento['Evento']['id']), array("class" => "btn btn-success"));
+                if($authUser['id'] != $evento['User']['id']) {
+                  echo $this->Html->link('Participar', array('controller' => 'evento', 'action' => 'participar', $evento['Evento']['id']), array("class" => "btn btn-success"));
+                }
               } else {
                 echo $this->Html->link('Fazer login', array('controller' => 'user', 'action' => 'login'), array("class" => "btn btn-danger"));
               }
