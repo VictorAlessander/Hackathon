@@ -56,7 +56,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             </div>
             <div id="navbar" class="navbar-collapse collapse">
 		       <?php 
-				if(count($authUser) < 1){
+				if(!$authUser){
 				echo '
 		                <div style="float: right" class="form-group">
 		                  <ul class="nav navbar-nav">
@@ -68,6 +68,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		                    </li>
 		                    <li>
 		                      <button type="submit" class="btn btn-success" style="margin-top: 10px">Entrar</button>
+		                    </li>
+		                    <li>
+		                      <a href="/cake/login/add"><button class="btn btn-warning"> Cadastrar-se</button></a>
 		                    </li>
 		                  </ul>
 		                </div>';
