@@ -84,6 +84,7 @@ class EventoController extends AppController {
 
 	public function add($id) {
 		$this->loadModel('Evento');
+		$this->loadModel('Categoria');
 		if($this->request->is('post')) {
 			$this->Evento->create();
             if ($this->Evento->save($this->request->data)) {
@@ -94,6 +95,11 @@ class EventoController extends AppController {
                 $this->Session->setFlash(__('Não foi possivel salvar, tente novamente.'));
             }
 		}
+		$lista = array();
+		foreach($this->Categoria->find('all') as $k){
+			$lista[$k['Categoria']['id']] = $k['Categoria']['nome'];
+		}
+		$this->set('ctgs', $lista);
 
 	}
 

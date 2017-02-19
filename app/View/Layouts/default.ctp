@@ -38,6 +38,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	?>
 </head>
 <body>
+	<?php echo $this->Html->script('jquery-3.1.1.min'); ?>
+	<?php echo $this->Html->script('bootstrap'); ?>
 	<div>
 
 	<?php echo $this->Form->create('', array('url' => array('controller' => 'user','action' =>'login'),'id'=>'FrmPost'
@@ -100,8 +102,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     </div>
 	</div>
 
-	<?php echo $this->Html->script('jquery-3.1.1.min'); ?>
-	<?php echo $this->Html->script('bootstrap'); ?>
+
 	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

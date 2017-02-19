@@ -15,6 +15,9 @@
             <p>Descrição: <?=$evento['Evento']['descricao'] ?></p>
             <h3>Preço</h3>
             <span class="glyphicon glyphicon-usd">10</span>
+            <br>
+            <br>
+            <p> Local: <?=$evento['Evento']['local']?></p>
             <p>Deseja participar do evento?</p>
             <?php 
               if($authUser){
